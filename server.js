@@ -9,7 +9,9 @@ app.use(bodyParser.json());
 
 // Meta's expected POST health check endpoint
 app.post("/", (req, res) => {
-  res.status(200).json({ message: "Flow endpoint working ✅" });
+  const responseObj = { success: true };
+  const base64Response = Buffer.from(JSON.stringify(responseObj)).toString("base64");
+  res.status(200).send(base64Response);
 });
 
 // Flow endpoint (for actual data)
