@@ -7,15 +7,16 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(bodyParser.json());
 
-// Flow endpoint
+// Meta's expected POST health check endpoint
+app.post("/", (req, res) => {
+  res.status(200).json({ message: "Flow endpoint working ✅" });
+});
+
+// Flow endpoint (for actual data)
 app.post("/whatsapp-flow-endpoint", (req, res) => {
   const flowData = req.body;
-
   console.log("Received Flow Submission:");
   console.log(JSON.stringify(flowData, null, 2));
-
-  // TODO: Save to DB, trigger email, etc.
-
   res.status(200).send("Flow data received");
 });
 
